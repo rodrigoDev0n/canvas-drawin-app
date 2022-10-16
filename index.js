@@ -2,13 +2,15 @@ const canvas = document.getElementById('canvas');
 const paintColors = document.getElementById('colors');
 const selected = document.getElementsByName('colores');
 const selectedColorName = document.getElementById('colortext');
-
+const range = document.getElementById('range');
+const valueContainer = document.getElementById('valueContainer');
 
 const ctx = canvas.getContext('2d');
 
 let X;
 let Y;
 let initColor = '#000';
+let rangeValue = 10;
 
 const colors = [
     '#A0D5D5',
@@ -25,6 +27,22 @@ const colors = [
     '#0F398D',
 ];
 
+console.log(range);
+
+let valueIndicator = document.createElement('p');
+valueIndicator.textContent = range.value;
+valueContainer.appendChild(valueIndicator);
+
+const onChangeRange = () => {
+    range.addEventListener('mousemove', () => valueIndicator.textContent = range.value)
+    range.addEventListener('change', () => {
+        if (range.value === 10) {
+            ctx.lineWidth = 10;
+        }
+        rangeValue = range.value;
+    });
+}
+
 const changeColorPalette = (color) => {
     initColor = color;
 }
@@ -35,6 +53,8 @@ selectedname.style.cssText = `background-color: ${initColor}`;
 selectedColorName.appendChild(selectedname);
 
 const createColorsContainer = (c) => {
+    onChangeRange();
+
     let color = document.createElement('div');
     let text = document.createElement('p');
     text.textContent = c;
@@ -64,13 +84,17 @@ const onMouseClick = (event) => {
 const draw = (cursorX, cursorY) => {
     ctx.beginPath();
     ctx.moveTo(X,Y);
-    ctx.lineHeight = 100;
-    ctx.lineWith = 100;
+    ctx.lineHeight = 10;
+    ctx.lineWidth = rangeValue;
     ctx.strokeStyle = initColor;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+
+    const circle = new Path2D();
+    circle.arc(cursorX, cursorY, 0, 100, 2 * Math.PI, initColor);
+
     ctx.lineTo(cursorX, cursorY);
-    ctx.stroke();
+    ctx.stroke(circle);
 
     X = cursorX;
     Y = cursorY;
@@ -86,3 +110,4 @@ const stopDrawin = () => {
 
 canvas.addEventListener('mousedown', onMouseClick);
 canvas.addEventListener('mouseup', stopDrawin);
+range.addEventListener('mousedown', onChangeRange)

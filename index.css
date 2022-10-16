@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(91, 146, 121);
+    background-color: rgb(144, 165, 230);
 }
 
 * {
@@ -40,7 +40,7 @@ body {
 
 canvas {
     border-radius: 10px;
-    background-color: aliceblue;
+    background-color: #fff;
 }
 
 .colors-container {
@@ -66,4 +66,31 @@ canvas {
 
 .colors-selection {
     cursor: pointer;
+}
+
+.input-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    width: 700px;
+}
+
+.input-container input {
+    width: 90%;
+}
+
+.value-container {
+    align-items: center;
+    border-radius: 50px;
+    background-color: rgb(48, 133, 252);
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 50px;
+}
+
+.value-container p {
+    font-size: 25px;
+    font-weight: bold;
 }
