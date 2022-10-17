@@ -4,13 +4,17 @@ const selected = document.getElementsByName('colores');
 const selectedColorName = document.getElementById('colortext');
 const range = document.getElementById('range');
 const valueContainer = document.getElementById('valueContainer');
+const deleteButton = document.getElementById('customButton');
 
 const ctx = canvas.getContext('2d');
 
 let X;
 let Y;
 let initColor = '#000';
-let rangeValue = 10;
+let rangeValue = 5;
+let isdelete = {
+    active: false,
+}
 
 const colors = [
     '#A0D5D5',
@@ -36,8 +40,8 @@ valueContainer.appendChild(valueIndicator);
 const onChangeRange = () => {
     range.addEventListener('mousemove', () => valueIndicator.textContent = range.value)
     range.addEventListener('change', () => {
-        if (range.value === 10) {
-            ctx.lineWidth = 10;
+        if (range.value === 5) {
+            ctx.lineWidth = 5;
         }
         rangeValue = range.value;
     });
@@ -73,17 +77,32 @@ colors.map(c => (
     createColorsContainer(c)
 ));
 
+const clearLineCanvas = () => {
+    isdelete.active = true;
+    console.log(isdelete.active);
+}
+
+const clearCanvas = (cursorX, cursorY) => {
+    ctx.clearRect(cursorX, cursorY, 50, 50);
+    X = cursorX;
+    Y = cursorY;
+}
+
 const onMouseClick = (event) => {
+    if (isdelete.active) {
+        console.log('activo');
+    }
     X = event.offsetX;
     Y = event.offsetY
-    console.log({X, Y});
-    draw(X,Y);
+    draw(X, Y);
     canvas.addEventListener('mousemove', continuosDrawin)
 }
 
 const draw = (cursorX, cursorY) => {
+    if (isdelete.active) return;
+
     ctx.beginPath();
-    ctx.moveTo(X,Y);
+    ctx.moveTo(X, Y);
     ctx.lineHeight = 10;
     ctx.lineWidth = rangeValue;
     ctx.strokeStyle = initColor;
@@ -101,13 +120,19 @@ const draw = (cursorX, cursorY) => {
 }
 
 const continuosDrawin = (event) => {
-    draw(event.offsetX, event.offsetY);
+    if(isdelete.active) {
+        clearCanvas(event.offsetX, event.offsetY);
+    } else {
+        draw(event.offsetX, event.offsetY);
+    }
 }
 
 const stopDrawin = () => {
     canvas.removeEventListener('mousemove', continuosDrawin);
+    canvas.removeEventListener('mousedown', draw);
 }
 
 canvas.addEventListener('mousedown', onMouseClick);
 canvas.addEventListener('mouseup', stopDrawin);
-range.addEventListener('mousedown', onChangeRange)
+range.addEventListener('mousedown', onChangeRange);
+deleteButton.addEventListener('click', clearLineCanvas);

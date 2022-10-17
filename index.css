@@ -19,23 +19,25 @@ body {
 }
 
 .color-selected-container {
+    align-items: center;
     display: flex;
     justify-content: center;
     height: 150px;
-    width: 100%;
+    width: 90%;
 }
 
 .colortext-container {
+    align-items: center;
     display: flex;
     height: 100px;
-    width: 700px;
+    width: 1310px;
 }
 
 .custom-color-container {
     border-radius: 10px;
     margin-left: 20px;
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
 }
 
 canvas {
@@ -44,19 +46,18 @@ canvas {
 }
 
 .colors-container {
-    width: 400px;
-    height: 200px;
+    width: 500px;
+    height: 700px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
-    align-items: center;
     flex-direction: row;
 }
 
 .colors-selection {
     border-radius: 10px;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     margin: 10px;
     display: flex;
     justify-content: center;
@@ -72,8 +73,8 @@ canvas {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    height: 100px;
-    width: 700px;
+    height: 150px;
+    width: 1300px;
 }
 
 .input-container input {
@@ -86,11 +87,30 @@ canvas {
     background-color: rgb(48, 133, 252);
     display: flex;
     justify-content: center;
-    height: 40px;
+    height: 30px;
     width: 50px;
 }
 
 .value-container p {
     font-size: 25px;
     font-weight: bold;
+}
+
+.delete-container {
+    border-radius: 10px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    color: wheat;
+    height: 50px;
+    width: 150px;
+}
+
+.delete-container:hover {
+    cursor: pointer;
+}
+
+/* 1425 pixeles medida de una laptop de 13 pulgadas */
+@media(max-width: 1425px) {
+
 }
