@@ -3,6 +3,5 @@
 practicando y aprendiendo a usar mas el canvas con una app para dibujar hecha en html css y javascript
 ---
 
-
-https://user-images.githubusercontent.com/108855218/196016256-2b5a0995-ebbe-4776-ab90-bb3edd61e96a.mov
+https://user-images.githubusercontent.com/108855218/196079746-fab717e0-16e3-43e3-9e37-539040e4225f.mov
 
