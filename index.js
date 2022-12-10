@@ -1,3 +1,6 @@
+// TODO: Modificar interfaz.
+// TODO: Añadir selector intuitivo.
+
 const canvas = document.getElementById('canvas');
 const paintColors = document.getElementById('colors');
 const selected = document.getElementsByName('colores');
