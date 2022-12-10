@@ -1,5 +1,6 @@
 // TODO: Modificar interfaz.
 // TODO: Añadir selector intuitivo.
+// TODO: Modularizar codigo.
 
 const canvas = document.getElementById('canvas');
 const paintColors = document.getElementById('colors');
