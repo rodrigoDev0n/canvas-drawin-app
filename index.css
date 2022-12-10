@@ -10,7 +10,7 @@ body {
 }
 
 .main {
-    height: 100vh;
+    height: 85vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -41,8 +41,26 @@ body {
 }
 
 canvas {
+    top: 390px;
+    position: absolute;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: white;
+    z-index: 1;
+}
+
+.customCanvas {
+    opacity: 0;
+    z-index: 1;
+}
+
+.canvas2 {
+    background-color: rgba(245, 222, 179, 0.071);
+    z-index: 2;
+}
+
+.canvas3 {
+    background-color: rgba(245, 222, 179, 0.071);
+    z-index: 3;
 }
 
 .colors-container {
@@ -78,7 +96,7 @@ canvas {
 }
 
 .input-container input {
-    width: 90%;
+    width: 80%;
 }
 
 .value-container {
@@ -106,11 +124,63 @@ canvas {
     width: 150px;
 }
 
+.nodelete-container {
+    background-color: green;
+}
+
+.add-new-canvas {
+    background-color: black;
+}
+
 .delete-container:hover {
     cursor: pointer;
 }
 
-/* 1425 pixeles medida de una laptop de 13 pulgadas */
-@media(max-width: 1425px) {
+.options-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 60%;
+}
 
+.capas-selector {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    background-color: red;
+}
+
+.capa-is-selected {
+    align-items: center;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    background-color: rgba(0, 255, 217, 0.665);
+}
+
+.capas-selector:hover {
+    cursor: pointer;
+}
+
+.selecto-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+/* 1425 pixeles medida de una laptop de 13 pulgadas */
+@media(max-width: 1500px) {
+    canvas {
+        top: 340px;
+    }
 }

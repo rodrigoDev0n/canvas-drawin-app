@@ -11,25 +11,37 @@
     <title>Canvas</title>
 </head>
 <body>
-    <main class="main">
-        <div class="color-selected-container">
+    <main class="main" id="main">
+        <div class="color-selected-container" id="info-container">
             <div id="colortext" class="colortext-container">
                 <h3>Color activo: </h3>
                 <!-- Contiene el color seleccionado por el usuario -->
             </div>
-            <div class="delete-container" id="customButton">
-                <p>ELIMINAR</p>
-                <!-- Contiene la opción de borrar -->
+            <div class="options-container" id="options">
+                <div class="delete-container" id="delete">
+                    <p>ELIMINAR</p>
+                    <!-- Contiene la opción de borrar -->
+                </div>
+                <div class="delete-container nodelete-container" id="draw">
+                    <p>Dibujar</p>
+                    <!-- Contiene la opción de borrar -->
+                </div>
+                <div class="delete-container add-new-canvas" id="add">
+                    <p>Añadir capa</p>
+                    <!-- Contiene la opción de borrar -->
+                </div>
             </div>
         </div>
         <canvas id="canvas" width="1300" height="400"></canvas>
         <div class="input-container">
+            <p id="size">Tamaño del pincel:</p>
             <input class="inputrange" type="range" min="5" max="200" value="5" name="" id="range">
             <div class="value-container" id="valueContainer"></div>
         </div>
         <div id="colors" class="colors-container">
         </div>
     </main>
+    <div class="selecto-container" id="selector"></div>
 </body>
 <script src="./index.js"></script>
 </html>

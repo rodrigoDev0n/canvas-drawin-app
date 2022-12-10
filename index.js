@@ -4,9 +4,17 @@ const selected = document.getElementsByName('colores');
 const selectedColorName = document.getElementById('colortext');
 const range = document.getElementById('range');
 const valueContainer = document.getElementById('valueContainer');
-const deleteButton = document.getElementById('customButton');
+const deleteButton = document.getElementById('delete');
+const drawButton = document.getElementById('draw');
+const sizeSelectionText = document.getElementById('size');
+const addNewCanvas = document.getElementById('add');
+const main = document.getElementById('main');
+const opts = document.getElementById('options');
+const selectorContainer = document.getElementById('selector'); 
 
-const ctx = canvas.getContext('2d');
+
+
+let ctx = canvas.getContext('2d');
 
 let X;
 let Y;
@@ -14,7 +22,8 @@ let initColor = '#000';
 let rangeValue = 5;
 let isdelete = {
     active: false,
-}
+};
+let capas = [];
 
 const colors = [
     '#A0D5D5',
@@ -31,11 +40,85 @@ const colors = [
     '#0F398D',
 ];
 
-console.log(range);
-
 let valueIndicator = document.createElement('p');
 valueIndicator.textContent = range.value;
 valueContainer.appendChild(valueIndicator);
+
+const addCanvas = () => {
+    let newcanvas = document.createElement('canvas');
+    newcanvas.width = 1300;
+    newcanvas.height = 400;
+    newcanvas.className = 'canvas2';
+    newcanvas.id = 'canvas';
+    main.appendChild(newcanvas);
+
+    let capasContainer = document.createElement('div');
+    capasContainer.className = 'capas-selector';
+    selectorContainer.appendChild(capasContainer);
+
+/*     ctx = newcanvas.getContext('2d');
+
+    newcanvas.addEventListener('mousedown', (event) => {
+        if (isdelete.active) {
+            console.log('activo');
+        }
+        X = event.offsetX;
+        Y = event.offsetY;
+        draw(X, Y);
+        newcanvas.addEventListener('mousemove', continuosDrawin)
+    });
+    newcanvas.addEventListener('mouseup', () => {
+        newcanvas.removeEventListener('mousemove', continuosDrawin);
+    }); */
+    // Añade el componente que permite seleccionar las capas.
+    
+    const capasChild = document.createElement('div');
+    capasChild.cssText = 'nueva capa';
+    capasChild.className = 'capas-selector';
+    capasChild.id = Math.floor(Math.random() * 100);
+    capasContainer.id = capasChild.id;
+    newcanvas.name = capasChild.id;
+
+    capas.push({
+      id: capasChild.id,
+      component: capasChild,
+      canvas: newcanvas,
+    });
+
+    canvas.addEventListener('mousedown', onMouseClick);
+    canvas.addEventListener('mouseup', stopDrawin);
+
+    capasContainer.addEventListener('click', () => {
+        let counter = capas.length;
+        capas.find(e => {
+            if (e.id != newcanvas.name) {
+                e.canvas.className = 'canvas2';
+            } 
+
+            if (e.id === newcanvas.name) {
+                e.canvas.className = 'canvas3';
+                if (newcanvas.className === 'canvas3') {
+                    capasContainer.className = 'capa-is-selected';
+                    ctx = e.canvas.getContext('2d');
+                    e.canvas.addEventListener('mousedown', (event) => {
+                        if (isdelete.active) {
+                            console.log('activo');
+                        }
+                        X = event.offsetX;
+                        Y = event.offsetY;
+                        draw(X, Y);
+                        e.canvas.addEventListener('mousemove', continuosDrawin)
+                    });
+                    e.canvas.addEventListener('mouseup', () => {
+                        e.canvas.removeEventListener('mousemove', continuosDrawin);
+                    });
+                }
+            }
+        })
+    })
+
+}
+
 
 const onChangeRange = () => {
     range.addEventListener('mousemove', () => valueIndicator.textContent = range.value)
@@ -77,13 +160,18 @@ colors.map(c => (
     createColorsContainer(c)
 ));
 
+const stopClearlineCanvas = () => {
+    isdelete.active = false;
+    sizeSelectionText.textContent = 'tamaño del pincel';
+}
+
 const clearLineCanvas = () => {
     isdelete.active = true;
-    console.log(isdelete.active);
+    sizeSelectionText.textContent = 'tamaño de la goma';
 }
 
 const clearCanvas = (cursorX, cursorY) => {
-    ctx.clearRect(cursorX, cursorY, 50, 50);
+    ctx.clearRect(cursorX, cursorY, rangeValue, rangeValue);
     X = cursorX;
     Y = cursorY;
 }
@@ -93,7 +181,7 @@ const onMouseClick = (event) => {
         console.log('activo');
     }
     X = event.offsetX;
-    Y = event.offsetY
+    Y = event.offsetY;
     draw(X, Y);
     canvas.addEventListener('mousemove', continuosDrawin)
 }
@@ -132,7 +220,10 @@ const stopDrawin = () => {
     canvas.removeEventListener('mousedown', draw);
 }
 
-canvas.addEventListener('mousedown', onMouseClick);
-canvas.addEventListener('mouseup', stopDrawin);
+
+/* canvas.addEventListener('mousedown', onMouseClick);
+canvas.addEventListener('mouseup', stopDrawin); */
 range.addEventListener('mousedown', onChangeRange);
 deleteButton.addEventListener('click', clearLineCanvas);
+drawButton.addEventListener('click', stopClearlineCanvas);
+addNewCanvas.addEventListener('click', addCanvas);
