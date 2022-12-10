@@ -1,5 +1,6 @@
 // TODO: Modificar interfaz.
 // TODO: Añadir selector intuitivo.
+// TODO: Revisar si se pueden pasar por parametros algunas variables que no se utilizan.
 
 import { colors } from "./src/data/colors.js";
 import { 
